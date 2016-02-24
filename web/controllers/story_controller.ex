@@ -30,7 +30,7 @@ defmodule Estimator.StoryController do
 
   def show(conn, %{"id" => id}) do
     story = Repo.get!(Story, id)
-    render(conn, "show.html", story: story)
+    render(conn, "show.html", story: story, current_user: get_session(conn, :current_user))
   end
 
   def edit(conn, %{"id" => id}) do

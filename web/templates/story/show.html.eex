@@ -19,9 +19,14 @@
 
 </ul>
 
-<a class="btn btn-primary btn-lg" href="/auth/github">
-      <i class="fa fa-github"></i>
-      Sign in with GitHub
-    </a>
+<%= if @current_user do %>
+  Welcome, <%= @current_user.id %>
+  <%= link "Logout", to: auth_path(@conn, :delete), method: :delete, class: "btn btn-danger" %>
+<% else %>
+  <a class="btn btn-primary btn-lg" href="/auth/github">
+        <i class="fa fa-github"></i>
+        Sign in with GitHub
+      </a>
+<% end %>
 <%= link "Edit", to: story_path(@conn, :edit, @story) %>
 <%= link "Back", to: story_path(@conn, :index) %>
