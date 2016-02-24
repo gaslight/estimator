@@ -32,11 +32,12 @@ config :logger, :console, format: "[$level] $message\n"
 # and calculating stacktraces is usually expensive.
 config :phoenix, :stacktrace_depth, 20
 
-# Configure your database
-config :estimator, Estimator.Repo,
-  adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
-  database: "estimator_dev",
-  hostname: "localhost",
-  pool_size: 10
+import_config "dev.db.exs"
+# Put something like this in dev.db.exs
+# config :estimator, Estimator.Repo,
+#   adapter: Ecto.Adapters.Postgres,
+#   username: "postgres",
+#   password: "postgres",
+#   database: "estimator_dev",
+#   hostname: "localhost",
+#   pool_size: 10

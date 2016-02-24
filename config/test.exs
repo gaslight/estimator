@@ -9,11 +9,4 @@ config :estimator, Estimator.Endpoint,
 # Print only warnings and errors during test
 config :logger, level: :warn
 
-# Configure your database
-config :estimator, Estimator.Repo,
-  adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
-  database: "estimator_test",
-  hostname: "localhost",
-  pool: Ecto.Adapters.SQL.Sandbox
+import_config "test.db.exs"
