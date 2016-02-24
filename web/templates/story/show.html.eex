@@ -19,5 +19,9 @@
 
 </ul>
 
+<a class="btn btn-primary btn-lg" href="/auth/github">
+      <i class="fa fa-github"></i>
+      Sign in with GitHub
+    </a>
 <%= link "Edit", to: story_path(@conn, :edit, @story) %>
 <%= link "Back", to: story_path(@conn, :index) %>
