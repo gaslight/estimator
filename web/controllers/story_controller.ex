@@ -13,19 +13,20 @@ defmodule Estimator.StoryController do
 
   def new(conn, _params) do
     changeset = Story.changeset(%Story{})
-    render(conn, "new.html", changeset: changeset)
+    projects = Repo.all(Project) |> Enum.map(&( {&1.name, &1.id} ))
+    render(conn, "new.html", changeset: changeset, projects: projects)
   end
 
   def create(conn, %{"story" => story_params}) do
     changeset = Story.changeset(%Story{}, story_params)
-
+    projects = Repo.all(Project) |> Enum.map(&( {&1.name, &1.id} ))
     case Repo.insert(changeset) do
       {:ok, _story} ->
         conn
         |> put_flash(:info, "Story created successfully.")
         |> redirect(to: story_path(conn, :index))
       {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        render(conn, "new.html", changeset: changeset, projects: projects)
     end
   end
 
@@ -43,6 +44,7 @@ defmodule Estimator.StoryController do
 
   def update(conn, %{"id" => id, "story" => story_params}) do
     story = Repo.get!(Story, id)
+    projects = Repo.all(Project) |> Enum.map(&( {&1.name, &1.id} ))
     changeset = Story.changeset(story, story_params)
 
     case Repo.update(changeset) do
@@ -51,7 +53,7 @@ defmodule Estimator.StoryController do
         |> put_flash(:info, "Story updated successfully.")
         |> redirect(to: story_path(conn, :show, story))
       {:error, changeset} ->
-        render(conn, "edit.html", story: story, changeset: changeset)
+        render(conn, "edit.html", story: story, changeset: changeset, projects: projects)
     end
   end
 

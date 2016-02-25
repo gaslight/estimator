@@ -2,7 +2,7 @@ defmodule Estimator.StoryControllerTest do
   use Estimator.ConnCase
 
   alias Estimator.Story
-  @valid_attrs %{description: "some content", estimate: 42, title: "some content"}
+  @valid_attrs %{description: "some content", title: "some content"}
   @invalid_attrs %{}
 
   test "lists all entries on index", %{conn: conn} do

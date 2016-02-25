@@ -9,7 +9,7 @@
 
   <li>
     <strong>Project:</strong>
-    <%= @story.project.name %>
+    <%= if @story.project, do: @story.project.name %>
   </li>
 
   <li>
