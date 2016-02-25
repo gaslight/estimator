@@ -2,7 +2,7 @@ defmodule Estimator.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "rooms:*", Estimator.RoomChannel
+  channel "stories:*", Estimator.StoryChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket

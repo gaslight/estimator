@@ -24,10 +24,11 @@ defmodule Estimator.AuthController do
   end
 
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
-    redirect_url = conn |> Plug.Conn.get_req_header("referer") |> hd
+    IEx.pry
+    # redirect_url = conn |> Plug.Conn.get_req_header("referer") |> hd
     conn
     |> put_flash(:info, "Successfully authenticated.")
     |> put_session(:current_user, %{id: auth.uid, name: auth.info.name})
-    |> redirect(external: redirect_url)
+    |> redirect(to: "/")
   end
 end

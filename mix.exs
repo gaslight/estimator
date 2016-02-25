@@ -38,6 +38,7 @@ defmodule Estimator.Mixfile do
      {:gettext, "~> 0.9"},
       {:ueberauth, "~> 0.2"},
       {:ueberauth_github, "~> 0.2"},
+      {:ueberauth_slack, "~> 0.2"},
      {:cowboy, "~> 1.0"}]
   end
 

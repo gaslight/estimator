@@ -11,8 +11,14 @@
 //
 // If you no longer want to use a dependency, remember
 // to also remove its path from "config.paths.watched".
-import "phoenix_html"
+import "phoenix_html";
+import StoryObserver from "./story";
 
+$(() => {
+  if ($("ul.story-details").length > 0) {
+    window.storyObserver = new StoryObserver($("ul.story-details").data("story"));
+  }
+});
 // Import local files
 //
 // Local files can be imported directly using relative

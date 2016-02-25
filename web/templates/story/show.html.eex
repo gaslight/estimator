@@ -1,6 +1,6 @@
 <h2>Show story</h2>
 
-<ul>
+<ul class="story-details" data-story="<%= @story.id %>">
 
   <li>
     <strong>Title:</strong>
@@ -22,11 +22,14 @@
 <%= if @current_user do %>
   Welcome, <%= @current_user.id %>
   <%= link "Logout", to: auth_path(@conn, :delete), method: :delete, class: "btn btn-danger" %>
+  <script>
+    window.userId = "<%= @current_user.id %>";
+  </script>
 <% else %>
-  <a class="btn btn-primary btn-lg" href="/auth/github">
-        <i class="fa fa-github"></i>
-        Sign in with GitHub
-      </a>
+  <a class="btn btn-primary btn-lg" href="/auth/slack">
+    <i class="fa fa-slack"></i>
+    Sign in with Slack
+  </a>
 <% end %>
 <%= link "Edit", to: story_path(@conn, :edit, @story) %>
 <%= link "Back", to: story_path(@conn, :index) %>

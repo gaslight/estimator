@@ -24,4 +24,5 @@
   "ranch": {:hex, :ranch, "1.2.1"},
   "ssl_verify_hostname": {:hex, :ssl_verify_hostname, "1.0.5"},
   "ueberauth": {:hex, :ueberauth, "0.2.0"},
-  "ueberauth_github": {:hex, :ueberauth_github, "0.2.0"}}
+  "ueberauth_github": {:hex, :ueberauth_github, "0.2.0"},
+  "ueberauth_slack": {:hex, :ueberauth_slack, "0.2.0"}}

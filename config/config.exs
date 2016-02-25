@@ -19,15 +19,20 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
-  config :ueberauth, Ueberauth,
-    providers: [
-      github: { Ueberauth.Strategy.Github, [] },
-    ]
+config :ueberauth, Ueberauth,
+  providers: [
+    github: { Ueberauth.Strategy.Github, [] },
+    slack: { Ueberauth.Strategy.Slack, [] },
+  ]
 
 
 config :ueberauth, Ueberauth.Strategy.Github.OAuth,
   client_id: "d1723405c7bbedcbf9ff",
   client_secret: "ab549c93f262028ad264c3277ab019fe0cb0179a"
+
+config :ueberauth, Ueberauth.Strategy.Slack.OAuth,
+  client_id: "22994722193.23110337445",
+  client_secret: "e6245b552cee2f0e7c418f6ca4b2ce1e"
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
