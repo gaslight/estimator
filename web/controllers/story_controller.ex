@@ -2,6 +2,7 @@ defmodule Estimator.StoryController do
   use Estimator.Web, :controller
 
   alias Estimator.Story
+  alias Estimator.Project
 
   plug :scrub_params, "story" when action in [:create, :update]
 
@@ -29,14 +30,15 @@ defmodule Estimator.StoryController do
   end
 
   def show(conn, %{"id" => id}) do
-    story = Repo.get!(Story, id)
+    story = Repo.get!(Story, id) |> Repo.preload([:project])
     render(conn, "show.html", story: story, current_user: get_session(conn, :current_user))
   end
 
   def edit(conn, %{"id" => id}) do
     story = Repo.get!(Story, id)
+    projects = Repo.all(Project) |> Enum.map(&( {&1.name, &1.id} ))
     changeset = Story.changeset(story)
-    render(conn, "edit.html", story: story, changeset: changeset)
+    render(conn, "edit.html", story: story, changeset: changeset, projects: projects)
   end
 
   def update(conn, %{"id" => id, "story" => story_params}) do

@@ -8,6 +8,11 @@
   </li>
 
   <li>
+    <strong>Project:</strong>
+    <%= @story.project.name %>
+  </li>
+
+  <li>
     <strong>Description:</strong>
     <%= @story.description %>
   </li>
