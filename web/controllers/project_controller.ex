@@ -2,6 +2,7 @@ defmodule Estimator.ProjectController do
   use Estimator.Web, :controller
 
   alias Estimator.Project
+  alias Estimator.TeamMember
 
   plug :scrub_params, "project" when action in [:create, :update]
 
@@ -53,8 +54,15 @@ defmodule Estimator.ProjectController do
     end
   end
 
-  def add_team_member(conn, params) do
-    conn
+  def add_team_member(conn, %{"id" => id, "team_member" => team_member_params}) do
+    project = Repo.get!(Project, id) |> Repo.preload([:team_members])
+    changeset = TeamMember.changeset(%TeamMember{}, Map.put(team_member_params, "project_id", id))
+    case Repo.insert(changeset) do
+      {:ok, _ } ->
+        conn |> redirect(to: project_path(conn, :show, project))
+      {:error, changeset} ->
+        render(conn, "show.html", project: project)
+    end
   end
 
   def delete(conn, %{"id" => id}) do

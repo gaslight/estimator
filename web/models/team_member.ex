@@ -8,7 +8,7 @@ defmodule Estimator.TeamMember do
     timestamps
   end
 
-  @required_fields ~w(email)
+  @required_fields ~w(email project_id)
   @optional_fields ~w()
 
   @doc """
