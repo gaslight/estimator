@@ -9,5 +9,23 @@
 
 </ul>
 
+<h3>Team members</h3>
+
+<ul>
+
+  <%= for team_member <- @project.team_members do %>
+  <li>
+    <strong>Email:</strong>
+    <%= team_member.email %>
+  </li>
+  <% end %>
+
+</ul>
+
+<%= form_for @conn, project_path(@conn, :add_team_member, @project), [name: "add-team-member"], fn f -> %>
+  <input type="text" name="team_member[email]" />
+  <input type="submit" value="Add Team Member" />
+<% end %>
+
 <%= link "Edit", to: project_path(@conn, :edit, @project) %>
 <%= link "Back", to: project_path(@conn, :index) %>

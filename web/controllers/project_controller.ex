@@ -30,7 +30,7 @@ defmodule Estimator.ProjectController do
   end
 
   def show(conn, %{"id" => id}) do
-    project = Repo.get!(Project, id)
+    project = Repo.get!(Project, id) |> Repo.preload([:team_members])
     render(conn, "show.html", project: project)
   end
 
