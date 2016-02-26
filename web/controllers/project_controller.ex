@@ -53,6 +53,10 @@ defmodule Estimator.ProjectController do
     end
   end
 
+  def add_team_member(conn, params) do
+    conn
+  end
+
   def delete(conn, %{"id" => id}) do
     project = Repo.get!(Project, id)
 

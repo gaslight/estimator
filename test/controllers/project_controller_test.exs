@@ -68,6 +68,7 @@ defmodule Estimator.ProjectControllerTest do
     project = Repo.insert! %Project{}
     team_member_attrs = %{email: "bob@example.com"}
     conn = post conn, project_path(conn, :add_team_member, project), team_member: team_member_attrs
-
+    project = Repo.get!(Project, project.id) |> Repo.preload([:team_members])
+    assert Enum.count(project.team_members) == 1
   end
 end

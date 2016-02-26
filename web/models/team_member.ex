@@ -1,16 +1,14 @@
-defmodule Estimator.Project do
+defmodule Estimator.TeamMember do
   use Estimator.Web, :model
 
-  alias Estimator.TeamMember
-  
-  schema "projects" do
-    field :name, :string
+  schema "team_members" do
+    field :email, :string
+    belongs_to :project, Estimator.Project
 
     timestamps
-    has_many :team_members, TeamMember
   end
 
-  @required_fields ~w(name)
+  @required_fields ~w(email)
   @optional_fields ~w()
 
   @doc """

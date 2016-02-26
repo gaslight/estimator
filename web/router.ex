@@ -21,6 +21,7 @@ defmodule Estimator.Router do
     get "/", PageController, :index
     resources "/stories", StoryController
     resources "/projects", ProjectController
+    post "/projects/:id/team_members", ProjectController, :add_team_member
   end
 
   scope "/auth", Estimator do
