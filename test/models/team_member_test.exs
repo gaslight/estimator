@@ -3,8 +3,8 @@ defmodule Estimator.TeamMemberTest do
 
   alias Estimator.TeamMember
 
-  @valid_attrs %{email: "some content"}
-  @invalid_attrs %{}
+  @valid_attrs %{email: "some content", project_id: 1}
+  @invalid_attrs %{foo: "bar"}
 
   test "changeset with valid attributes" do
     changeset = TeamMember.changeset(%TeamMember{}, @valid_attrs)
