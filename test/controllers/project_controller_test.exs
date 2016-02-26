@@ -63,4 +63,11 @@ defmodule Estimator.ProjectControllerTest do
     assert redirected_to(conn) == project_path(conn, :index)
     refute Repo.get(Project, project.id)
   end
+
+  test "add team member", %{conn: conn} do
+    project = Repo.insert! %Project{}
+    team_member_attrs = %{email: "bob@example.com"}
+    conn = post conn, project_path(conn, :add_team_member, project), team_member: team_member_attrs
+
+  end
 end
