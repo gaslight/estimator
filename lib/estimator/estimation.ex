@@ -2,7 +2,8 @@ defmodule Estimator.Estimation do
   defstruct state: :waiting_for_players,
             joined_team_members: MapSet.new,
             story: nil,
-            estimates: []
+            estimates: [],
+            estimate: nil
 
   alias Estimator.Estimation
 
@@ -26,9 +27,17 @@ defmodule Estimator.Estimation do
 
   defp calculate_state(estimation = %Estimation{state: :estimating, estimates: estimates}) do
     if Enum.count(estimates) == Enum.count(estimation.story.project.team_members) do
-      %{ estimation | state: :disagree }
+      %{ estimation | state: :complete } |> calculate_state
     else
       estimation
+    end
+  end
+
+  defp calculate_state(estimation = %Estimation{state: :complete, estimates: estimates}) do
+    if (Enum.dedup(estimates) |> Enum.count) == 1 do
+      %{ estimation | state: :agree, estimate: List.first(estimates) }
+    else
+      %{ estimation | state: :disagree }
     end
   end
 
