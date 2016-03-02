@@ -18,7 +18,9 @@ defmodule Estimator.EstimationServer do
   end
 
   def handle_call({:join_estimation, story, team_member}, _from, estimations) do
-    estimation = estimations |> Map.put_new(story.id, %Estimation{}) |> Map.get(story.id)
-    # {:reply, {:ok, Map.put(estim)
+    estimations = Map.put_new(estimations, story.id, %Estimation{story: story})
+    estimation = Map.get(estimations, story.id)
+    |> Estimation.join_estimation(team_member)
+    {:reply, {:ok, estimation}, Map.put(estimations, story.id, estimation)}
   end
 end
